@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/jp/kobe_u/cs27/sensorbox/framework/SensorBoxFactory.java=UTF-8
+encoding//src/jp/kobe_u/cs27/sensorbox/framework/test/TestDrive.java=UTF-8
+encoding//src/jp/kobe_u/cs27/sensorbox/library/phidget/IFKitUtility.java=UTF-8
+encoding//src/jp/kobe_u/cs27/sensorbox/library/phidget/OpenIFKit.java=UTF-8

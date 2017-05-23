@@ -1,0 +1,21 @@
+<serviceGroup>
+	<service name="SensorBoxService" scope="application">
+		<description>
+			Web service that wraps a SensorBox
+		</description>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver  mep="http://www.w3.org/ns/wsdl/in-out" class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+		</messageReceivers>
+		<parameter name="ServiceClass" locked="false">
+			jp.kobe_u.cs27.sensor.service.SensorBoxService
+		</parameter>
+		<parameter name="xmlToJsonNamespaceMap">
+		    <mappings>
+		        <mapping xmlNamespace="http://localhost:8080" jsonNamespace=""/>
+		    </mappings>
+		</parameter>
+		<schema elementFormDefaultQualified="false" attributeFormDefaultQualified="false"/>
+	</service>
+
+</serviceGroup>

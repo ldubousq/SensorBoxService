@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<project basedir="." default="generate.service">
+
+	<!-- aar -->
+	<property name="dest.dir" value="build" />
+	<property name="dest.dir.classes" value="${dest.dir}/classes" />
+	<property name="dest.dir.lib" value="${dest.dir.classes}/lib" />
+
+	<!-- aar -->
+	<property name="repository.path" value="." />
+
+	<!-- サービス名 -->
+	<property name="service.name" value="SensorBoxService" />
+
+	<!-- クリーン -->
+	<target name="clean">
+		<delete dir="${dest.dir}" />
+	</target>
+
+	<!-- Tomcat -->
+	<path id="build.class.path">
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- build classes -->
+	<target name="prepare">
+		<mkdir dir="${dest.dir}" />
+		<mkdir dir="${dest.dir.classes}" />
+		<mkdir dir="${dest.dir.lib}" />
+		<mkdir dir="${dest.dir.classes}/META-INF" />
+	</target>
+
+	<!-- clean prepare  -->
+	<target name="generate.service" depends="clean,prepare">
+		<!-- services.xml (META-INF)ー-->
+		<copy todir="${dest.dir.classes}/META-INF" overwrite="true">
+			<fileset dir="src/META-INF/" />
+		</copy>
+
+		<!-- eval.jar -->
+		<copy  todir="${dest.dir.lib}" overwrite="true">
+			<fileset dir="lib/" />
+		</copy>
+		<!--
+		<copy file="lib/eval.jar" todir="${dest.dir.lib}" overwrite="true" />
+		<copy file="lib/SensorServiceFramework.jar" todir="${dest.dir.lib}" overwrite="true" />
+		<copy file="lib/powerConsumptionBean.jar" todir="${dest.dir.lib}" overwrite="true" />
+		<copy file="lib/phidget21.jar" todir="${dest.dir.lib}" overwrite="true" />
+		<copy file="lib/ibatis-2.3.4.726.jar" todir="${dest.dir.lib}" overwrite="true" />
+		-->
+
+		<!-- java build path -->
+		<javac debug="true" encoding="UTF-8" srcdir="src" destdir="${dest.dir.classes}"
+			includes="jp/kobe_u/cs27/sensor/**">
+			<classpath refid="build.class.path" />
+		</javac>
+
+		<!-- JAR AAR -->
+		<jar basedir="${dest.dir.classes}" destfile="${dest.dir}/${service.name}.aar" />
+
+		<!-- DEST AAR FILES -->
+		<copy file="${dest.dir}/${service.name}.aar" tofile="${repository.path}/${service.name}.aar" overwrite="true" />
+	</target>
+</project>
